@@ -16,7 +16,6 @@ class LoginPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -28,7 +27,6 @@ class LoginPage extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 30),
                         _header(context),
                         const SizedBox(height: 10),
                         _inputField(context),
@@ -74,11 +72,7 @@ class LoginPage extends StatelessWidget {
   Widget _logo(context) {
     return Column(
       children: [
-        Image.network(
-          'https://cdn-icons-png.flaticon.com/512/44/44338.png',
-          height: 58,
-          width: 200,
-        ),
+        Image.asset('lib/assets/urbanlogo.png',height: 150,width: 150,),
       ],
     );
   }

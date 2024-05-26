@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:urbanbuy/home.dart';
-import 'package:urbanbuy/loginpage.dart';
+import 'package:urbanbuy/homepage/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,10 +12,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+
+    theme: ThemeData(
+    scaffoldBackgroundColor: Colors.white,
+      // Other theme properties
+    ),
+
+    debugShowCheckedModeBanner: false,
       title: 'Urban-buy',
       home: SafeArea(
-        child: LoginPage(),
+        child: HomePage(),
       ),
     );
   }

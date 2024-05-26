@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:urbanbuy/griedview.dart';
+import 'package:urbanbuy/homepage/components/griedview.dart';
 
 class Sliderx extends StatelessWidget {
   const Sliderx({Key? key}) : super(key: key);
@@ -9,8 +9,8 @@ class Sliderx extends StatelessWidget {
   Widget build(BuildContext context) {
     List<String> imagePathList = [
       // Local asset // Network imag
-      "https://static.vecteezy.com/system/resources/previews/006/560/561/original/4-april-sale-poster-or-banner-with-4-over-on-product-podium-scene-april-4-sales-banner-template-design-for-social-media-and-website-special-offer-sale-50-off-campaign-or-promotion-free-vector.jpg", // Network image
-      "https://img.freepik.com/free-photo/sale-products-with-discount_23-2150296283.jpg?size=338&ext=jpg&ga=GA1.1.87170709.1707609600&semt=ais"
+      "lib/assets/crouselone.jpg",
+      "lib/assets/crouseltwo.png"
     ];
     return Column(
       children: [
@@ -34,7 +34,7 @@ class Sliderx extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 20.0),
           child: CarouselSlider.builder(
             options: CarouselOptions(
-              height: 120,
+              height: 160,
               viewportFraction: 0.8,
               initialPage: 0,
               enableInfiniteScroll: true,
@@ -104,11 +104,9 @@ class Sliderx extends StatelessWidget {
             },
           ),
         ),
-        const SizedBox(
-          height: 15,
-        ),
+
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.3,
+          height: MediaQuery.of(context).size.height * 0.16,
           width: MediaQuery.of(context).size.width,
           child: const Gri(),
         ),
