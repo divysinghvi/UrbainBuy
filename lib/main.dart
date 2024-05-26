@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:urbanbuy/homepage/components/Item_tile.dart';
 import 'package:urbanbuy/homepage/home.dart';
 
 void main() {
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'Urban-buy',
       home: SafeArea(
         child: HomePage(),
+
       ),
     );
   }
