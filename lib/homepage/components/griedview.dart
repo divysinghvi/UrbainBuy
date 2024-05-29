@@ -79,9 +79,7 @@ class CategoryItem extends StatelessWidget {
               child: CircleAvatar(
                 backgroundImage: AssetImage(imageUrl),
                 radius: 30,
-              ),git add .
-            git commit -m "category function working"
-            git push origin main
+              ),
 
 
             ),
