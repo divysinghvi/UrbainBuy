@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:urbanbuy/homepage/components/bottom_section.dart';
+import 'package:provider/provider.dart';
+import 'package:urbanbuy/cart/cart_model.dart';
 
 class ItemTile extends StatefulWidget {
   final String itemName;
   final String itemPrice;
   final String imagePath;
   final String proDescription;
+  final int index;
 
   const ItemTile({
     Key? key,
@@ -13,6 +15,7 @@ class ItemTile extends StatefulWidget {
     required this.itemPrice,
     required this.imagePath,
     required this.proDescription,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -293,9 +296,38 @@ class _ItemTileState extends State<ItemTile> with TickerProviderStateMixin {
     );
   }
 
-  FloatingActionButton _floatingButton() {
+  FloatingActionButton _floatingButton(BuildContext context, int index) {
     return FloatingActionButton(
-      onPressed: () {},
+      onPressed: () {
+        // Call addItemToCart method from CartModel with the index
+        Provider.of<CartModel>(context, listen: false).addItemToCart(index);
+
+        // Show a custom styled SnackBar for feedback
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.black,
+            elevation: 6.0, // Add elevation for a modern look
+            behavior: SnackBarBehavior.floating, // Floating style
+            content: Row(
+              children: [
+                Icon(Icons.check, color: Colors.green), // Check icon for success
+                SizedBox(width: 10),
+                Text(
+                  'Item added to cart',
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ],
+            ),
+            duration: Duration(seconds: 2), // Adjust the duration as needed
+            action: SnackBarAction(
+              label: 'Undo',
+              onPressed: () {
+                // Implement undo functionality if needed
+              },
+            ),
+          ),
+        );
+      },
       backgroundColor: Colors.black,
       child: Icon(Icons.shopping_cart, color: Colors.white),
     );
@@ -304,7 +336,7 @@ class _ItemTileState extends State<ItemTile> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: _floatingButton(),
+      floatingActionButton: _floatingButton(context, widget.index),
       body: SafeArea(
         child: Container(
           decoration: const BoxDecoration(
@@ -342,14 +374,4 @@ extension RippleExtension on Widget {
       child: this,
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    theme: ThemeData(
-      primarySwatch: Colors.grey,
-      scaffoldBackgroundColor: Colors.white,
-    ),
-    home: BottomSection(),
-  ));
 }

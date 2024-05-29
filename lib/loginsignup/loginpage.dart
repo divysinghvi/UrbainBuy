@@ -1,50 +1,67 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:urbanbuy/homepage/home.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: LoginPage(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key});
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          const customBackground(),
-          SafeArea(
-            child: Container(
-              margin: const EdgeInsets.fromLTRB(10, 20, 20, 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _logo(context),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            const CustomBackground(),
+            SafeArea(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.fromLTRB(10, 20, 20, 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        _header(context),
-                        const SizedBox(height: 10),
-                        _inputField(context),
-                        _signup(context),
-                        const SizedBox(height: 10),
+                        _logo(context),
                       ],
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          _header(context),
+                          const SizedBox(height: 10),
+                          _inputField(context),
+                          _signup(context),
+                          const SizedBox(height: 10),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
-  Widget _header(context) {
+  Widget _header(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(right: 90),
       child: Column(
@@ -55,6 +72,7 @@ class LoginPage extends StatelessWidget {
             style: GoogleFonts.robotoFlex(
               fontSize: 22,
               fontWeight: FontWeight.bold,
+              color: Colors.black,
             ),
           ),
           Text(
@@ -63,21 +81,25 @@ class LoginPage extends StatelessWidget {
               fontSize: 16,
               color: const Color.fromARGB(255, 61, 57, 57),
             ),
-          )
+          ),
         ],
       ),
     );
   }
 
-  Widget _logo(context) {
+  Widget _logo(BuildContext context) {
     return Column(
       children: [
-        Image.asset('lib/assets/urbanlogo.png',height: 150,width: 150,),
+        Image.asset(
+          'lib/assets/urbanlogo.png',
+          height: 150,
+          width: 150,
+        ),
       ],
     );
   }
 
-  Widget _inputField(context) {
+  Widget _inputField(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -88,6 +110,7 @@ class LoginPage extends StatelessWidget {
             style: GoogleFonts.robotoFlex(
               fontSize: 16,
               fontWeight: FontWeight.bold,
+              color: Colors.black,
             ),
           ),
         ),
@@ -125,6 +148,7 @@ class LoginPage extends StatelessWidget {
             style: GoogleFonts.robotoFlex(
               fontSize: 16,
               fontWeight: FontWeight.bold,
+              color: Colors.black,
             ),
           ),
         ),
@@ -168,12 +192,12 @@ class LoginPage extends StatelessWidget {
         _loginLinkedin(context),
         const SizedBox(
           height: 19,
-        )
+        ),
       ],
     );
   }
 
-  Widget _forgotPassword(context) {
+  Widget _forgotPassword(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -188,9 +212,14 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _loginbtn(context) {
+  Widget _loginbtn(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+      },
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
@@ -210,9 +239,14 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _loginLinkedin(context) {
+  Widget _loginLinkedin(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+      },
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
@@ -244,7 +278,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _or(context) {
+  Widget _or(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -271,7 +305,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _signup(context) {
+  Widget _signup(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -279,6 +313,7 @@ class LoginPage extends StatelessWidget {
           "Don't have an account? ",
           style: GoogleFonts.robotoFlex(
             fontSize: 14,
+            color: Colors.black,
           ),
         ),
         TextButton(
@@ -291,14 +326,14 @@ class LoginPage extends StatelessWidget {
               color: Color.fromARGB(255, 28, 29, 29),
             ),
           ),
-        )
+        ),
       ],
     );
   }
 }
 
-class customBackground extends StatelessWidget {
-  const customBackground({Key? key});
+class CustomBackground extends StatelessWidget {
+  const CustomBackground({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -324,24 +359,24 @@ class customBackground extends StatelessWidget {
 class WaveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    var path = new Path();
+    var path = Path();
     path.lineTo(0, size.height);
-    var firstStart = Offset(size.width / 5, size.height);
-    var firstEnd = Offset(size.width / 2.25, size.height - 50.0);
-    path.quadraticBezierTo(
-        firstStart.dx, firstStart.dy, firstEnd.dx, firstEnd.dy);
-    var secondStart =
-        Offset(size.width - (size.width / 3.24), size.height - 105);
-    var secondEnd = Offset(size.width, size.height - 10.0);
-    path.quadraticBezierTo(
-        secondStart.dx, secondStart.dy, secondEnd.dx, secondEnd.dy);
+    var firstControlPoint = Offset(size.width / 4, size.height - 40);
+    var firstEndPoint = Offset(size.width / 2, size.height - 20);
+    var secondControlPoint = Offset(size.width * 3 / 4, size.height);
+    var secondEndPoint = Offset(size.width, size.height - 30);
+
+    path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
+        firstEndPoint.dx, firstEndPoint.dy);
+    path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
+        secondEndPoint.dx, secondEndPoint.dy);
     path.lineTo(size.width, 0);
     path.close();
     return path;
   }
 
   @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return true;
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return false;
   }
 }

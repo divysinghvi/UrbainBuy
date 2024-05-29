@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:urbanbuy/homepage/components/category_item_page.dart';
 
 class Gri extends StatelessWidget {
   const Gri({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class Gri extends StatelessWidget {
           children: const [
             CategoryItem(
               imageUrl: "lib/assets/cloths.jpg",
-              title: 'Cloths',
+              title: 'Clothes',
             ),
             CategoryItem(
               imageUrl: "lib/assets/shoecat.jpg",
@@ -26,7 +27,7 @@ class Gri extends StatelessWidget {
             ),
             CategoryItem(
               imageUrl: "lib/assets/watchcat.jpg",
-              title: 'Watch',
+              title: 'Watches',
             ),
             // Additional categories can be added here...
           ],
@@ -53,7 +54,12 @@ class CategoryItem extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           // Handle category item tap
-          print('Tapped on $title');
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CategoryItemsPage(category: title),
+            ),
+          );
           // Navigate to the respective category page or perform any action here
         },
         child: Column(
@@ -73,7 +79,11 @@ class CategoryItem extends StatelessWidget {
               child: CircleAvatar(
                 backgroundImage: AssetImage(imageUrl),
                 radius: 30,
-              ),
+              ),git add .
+            git commit -m "category function working"
+            git push origin main
+
+
             ),
             const SizedBox(height: 8), // Add space between image and text
             Text(

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:urbanbuy/cart/cart.dart';
 import 'package:urbanbuy/homepage/components/homebody.dart';
-import 'package:urbanbuy/profilepage/profile_page.dart'; // Import your profile page
+import 'package:urbanbuy/orderpages/order.dart';
+import 'package:urbanbuy/profilepage/profile_page.dart';
+import 'package:urbanbuy/walletandsplash/wallet.dart'; // Import your profile page
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,10 +16,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  static List<Widget> _widgetOptions = <Widget>[
-    Homebody(),
-    Homebody(),
-    Homebody(), // Add your wallet page
+  static final List<Widget> _widgetOptions = <Widget>[
+    const Homebody(),
+    ShoppingCart(),
+    OrderPage(),
+    WalletPage(),
     ProfilePage(), // Add your profile page
   ];
 
@@ -48,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                   _selectedIndex = index;
                 });
               },
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               tabs: const [
                 GButton(
                   icon: Icons.home,

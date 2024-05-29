@@ -12,7 +12,7 @@ class Homebody extends StatefulWidget {
 class _HomebodyState extends State<Homebody> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return const SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

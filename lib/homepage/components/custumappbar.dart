@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:urbanbuy/cart/cart_model.dart';
+import 'package:urbanbuy/search_results.dart';
 
 class UpperSection extends StatefulWidget {
   const UpperSection({super.key});
@@ -8,10 +11,23 @@ class UpperSection extends StatefulWidget {
 }
 
 class _UpperSectionState extends State<UpperSection> {
+  final TextEditingController _searchController = TextEditingController();
+
+  void _handleSearch() {
+    String query = _searchController.text.toLowerCase();
+    var searchResults = Provider.of<CartModel>(context, listen: false).searchProducts(query);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SearchResultsPage(searchResults: searchResults),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0), // Added some padding around the entire column
+      padding: const EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -19,7 +35,7 @@ class _UpperSectionState extends State<UpperSection> {
             children: [
               const CircleAvatar(
                 backgroundImage: AssetImage('lib/assets/profile.jpg'),
-                radius: 30, // Set a larger radius for an appropriate profile picture size
+                radius: 30,
               ),
               const SizedBox(width: 10),
               Column(
@@ -39,7 +55,7 @@ class _UpperSectionState extends State<UpperSection> {
               Stack(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.notifications_none, size: 30), // Increased icon size
+                    icon: const Icon(Icons.notifications_none, size: 30),
                     onPressed: () {},
                   ),
                   Positioned(
@@ -68,12 +84,12 @@ class _UpperSectionState extends State<UpperSection> {
                 ],
               ),
               IconButton(
-                icon: const Icon(Icons.favorite_outline_rounded, size: 30), // Increased icon size
+                icon: const Icon(Icons.favorite_outline_rounded, size: 30),
                 onPressed: () {},
               ),
             ],
           ),
-          const SizedBox(height: 20), // Added space between the row and the search bar
+          const SizedBox(height: 20),
           Row(
             children: [
               Expanded(
@@ -81,12 +97,13 @@ class _UpperSectionState extends State<UpperSection> {
                   margin: const EdgeInsets.symmetric(horizontal: 10),
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade200, // Light grey background color for search bar
+                    color: Colors.grey.shade200,
                     border: Border.all(color: Colors.grey.shade300),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: const TextField(
-                    decoration: InputDecoration(
+                  child: TextField(
+                    controller: _searchController,
+                    decoration: const InputDecoration(
                       hintText: 'Search',
                       border: InputBorder.none,
                     ),
@@ -100,10 +117,8 @@ class _UpperSectionState extends State<UpperSection> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: IconButton(
-                  icon: const Icon(Icons.filter_list, color: Colors.white, size: 30), // Increased icon size and set color to white
-                  onPressed: () {
-                    // Add filter functionality
-                  },
+                  icon: const Icon(Icons.search, color: Colors.white, size: 30),
+                  onPressed: _handleSearch,
                 ),
               ),
             ],
